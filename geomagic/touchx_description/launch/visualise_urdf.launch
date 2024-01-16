@@ -1,0 +1,13 @@
+<launch>
+    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" 
+    name="joint_state_publisher_gui" output="screen"/>
+
+    <!-- robot_description tells robot_state_publisher where to find the omni's urdf description -->
+    <param name="robot_description" command="cat $(find touchx_description)/urdf/touch_x.urdf"/>
+
+    <!-- robot_state_publisher reads Geomagic_joint_states and publishes corresponding tfs -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <!--<remap from="joint_states" to="$(arg prefix)/joint_states" />-->
+    </node>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find touchx_description)/config/touchx.rviz" required="true" />
+</launch>
