@@ -28,7 +28,7 @@
       <geometry>
 				<mesh filename="package://touchx_description/meshes/torso.stl" />
       </geometry>
-      <material name="blue"/>
+      <material name="metal_seamed"/>
     </visual>
   </link>
   <link name="upper_arm" >
@@ -73,7 +73,7 @@
       <geometry>
 				<mesh filename="package://touchx_description/meshes/stylus.stl" />
       </geometry>
-      <material name="blue" />
+      <material name="metal_seamed" />
     </visual>
   </link>
   
@@ -81,43 +81,43 @@
   <joint name="j1" type="revolute" >
     <parent link="base" />
     <child link="torso" />
-    <origin xyz="0 0 0.09" rpy="0 0 0" />
+    <origin xyz="0 0 0.05499100" rpy="0 0 0"/>
     <axis xyz="0 0 1" />
     <limit lower="-0.98" upper="0.98" velocity="100" effort="5" />
   </joint>
   <joint name="j2" type="revolute" >
     <parent link="torso" />
     <child link="upper_arm" />
-    <origin xyz="-0.0075 0 0.035" rpy="0 0 0" />
+    <origin xyz="0.02053590 0 0.05108434" rpy="0 0 0"/>
     <axis xyz="1 0 0" />
     <limit lower="0" upper="1.75" velocity="100" effort="5" />
   </joint>
   <joint name="j3" type="revolute" >
     <parent link="upper_arm" />
     <child link="lower_arm" />
-    <origin xyz="0.0075 .134 0" rpy="-1.5 0 0" />
-    <axis xyz="1 0 0" />
+    <origin xyz="-0.01079507 -0.09921078 0.08910355" rpy="0 0 0"/>
+    <axis xyz="-1 0 0" />
 		<!-- upper="1.25" -->
     <limit lower="-0.81" upper="1.25" velocity="100" effort="5" /> 
   </joint>
   <joint name="j4" type="revolute" >
     <parent link="lower_arm" />
     <child link="upper_wrist" />
-    <origin xyz="0 0.08 0" />
+    <origin xyz="-0.00939800 -0.09969500 0" rpy="0 0 0"/>
     <axis xyz="0 1 0" />
     <limit lower="3.92" upper="8.83" velocity="100" effort="5" />
   </joint>
   <joint name="j5" type="revolute" >
     <parent link="upper_wrist" />
     <child link="lower_wrist" />
-    <origin xyz="0 0.0525 0" rpy="0.5 0 0" />
+    <origin xyz="-0.00184288 -0.03289300 0" rpy="0 0 0"/>
     <axis xyz="1 0 0" />
     <limit lower="-0.5" upper="1.75" velocity="100" effort="5" />
   </joint>
   <joint name="j6" type="revolute" >
     <parent link="lower_wrist" />
     <child link="stylus" />
-    <origin xyz="0 -0.023 0" rpy="3.14159 3.14159 0" />
+    <origin xyz="0.00001888 -0.02817081 -0.00970118" rpy="0 0 0"/>
     <axis xyz="0 1 0" />
     <limit lower="-2.58" upper="2.58" velocity="100" effort="5" />
   </joint>
