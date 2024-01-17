@@ -52,6 +52,13 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
+#install touchx drivers
+COPY ./device_drivers /home/${USERNAME}/device_drivers
+
+RUN ls -l /home/${USERNAME}
+
+RUN /bin/bash -c 'cd /home/${USERNAME} && echo "y" | ./device_drivers/open_haptics_install.sh'
+
 # Change to the non-root user and update file ownership
 RUN chown -R ${USERNAME} /home/${USERNAME}
 USER $USERNAME
@@ -61,4 +68,4 @@ RUN echo "export PS1='\[\e]0;\u@docker: \w\a\]${debian_chroot:+($debian_chroot)}
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${USERNAME}/.bashrc
 
 # Build source packages
-RUN /bin/bash -c '. /opt/ros/$ROS_DISTRO/setup.bash; cd /home/${USERNAME}/ros_ws; catkin_make -DCMAKE_BUILD_TYPE=Release'
+RUN /bin/bash -c '. /opt/ros/$ROS_DISTRO/setup.bash; cd /home/${USERNAME}/ros_ws;'
