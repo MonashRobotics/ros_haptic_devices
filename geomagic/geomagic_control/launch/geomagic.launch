@@ -1,5 +1,5 @@
 <launch>
-  <include file="$(find geomagic_control)/launch/geomagic_headless.launch" />
+  <include file="$(find geomagic_control)/launch/geomagic_headless.launch" />s
   <!-- rviz just lets you see the end result :) -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find geomagic_control)/cfg/geomagic.rviz" required="true" />
 </launch>

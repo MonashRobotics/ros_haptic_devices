@@ -88,7 +88,7 @@ public:
 
     void init(DeviceState *s) {
         ros::param::param(std::string("~device_name"), dev_name,
-                          std::string("Geomagic"));
+                          std::string("geomagic"));
 
         // Publish joint states for robot_state_publisher,
         // and anyone else who wants them.
@@ -105,12 +105,12 @@ public:
         // Initialize fixed message fields
         joint_state_msg.name.resize(6);
         joint_state_msg.position.resize(6);
-        joint_state_msg.name[0] = "waist";
-        joint_state_msg.name[1] = "shoulder";
-        joint_state_msg.name[2] = "elbow";
-        joint_state_msg.name[3] = "yaw";
-        joint_state_msg.name[4] = "pitch";
-        joint_state_msg.name[5] = "roll";
+        joint_state_msg.name[0] = "j1";
+        joint_state_msg.name[1] = "j2";
+        joint_state_msg.name[2] = "j3";
+        joint_state_msg.name[3] = "j4";
+        joint_state_msg.name[4] = "j5";
+        joint_state_msg.name[5] = "j6";
 
         joy_msg.axes.resize(6);
         joy_msg.buttons.resize(2);
@@ -197,12 +197,12 @@ public:
     void publish_device_state() {
         // Set and publish joint_state_msg
         joint_state_msg.header.stamp = ros::Time::now();
-        joint_state_msg.position[0] = -state->thetas[1];
+        joint_state_msg.position[0] =  state->thetas[1];
         joint_state_msg.position[1] =  state->thetas[2];
         joint_state_msg.position[2] =  state->thetas[3];
-        joint_state_msg.position[3] = -state->thetas[4] + M_PI;
-        joint_state_msg.position[4] = -state->thetas[5] - 3*M_PI/4;
-        joint_state_msg.position[5] =  state->thetas[6] + M_PI;
+        joint_state_msg.position[3] =  state->thetas[4];
+        joint_state_msg.position[4] =  state->thetas[5];
+        joint_state_msg.position[5] =  state->thetas[6];
         joint_pub.publish(joint_state_msg);
 
         // Set and publish button_event_msg

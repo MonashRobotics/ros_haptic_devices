@@ -3,7 +3,7 @@
     name="joint_state_publisher_gui" output="screen"/>
 
     <!-- robot_description tells robot_state_publisher where to find the omni's urdf description -->
-    <param name="robot_description" command="cat $(find touchx_description)/urdf/touch_x.urdf"/>
+    <param name="robot_description" command="cat $(find geomagic_description)/urdf/touch_x.urdf"/>
 
     <!-- robot_state_publisher reads Geomagic_joint_states and publishes corresponding tfs -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
