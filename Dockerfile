@@ -46,6 +46,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create and enter a ros workspace
 WORKDIR /home/${USERNAME}/ros_ws
+RUN mkdir -p /home/${USERNAME}/ros_ws/src
 
 # Install python dependencies
 RUN apt-get update && apt-get install -y \
@@ -55,9 +56,9 @@ RUN apt-get update && apt-get install -y \
 #install touchx drivers
 COPY ./device_drivers /home/${USERNAME}/device_drivers
 
-RUN ls -l /home/${USERNAME}
-
 RUN /bin/bash -c 'cd /home/${USERNAME} && echo "y" | ./device_drivers/open_haptics_install.sh'
+
+RUN /bin/bash -c 'cd /home/${USERNAME} && echo "y" | ./device_drivers/touch_driver_install_2022.sh'
 
 # Change to the non-root user and update file ownership
 RUN chown -R ${USERNAME} /home/${USERNAME}
@@ -68,4 +69,4 @@ RUN echo "export PS1='\[\e]0;\u@docker: \w\a\]${debian_chroot:+($debian_chroot)}
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${USERNAME}/.bashrc
 
 # Build source packages
-RUN /bin/bash -c '. /opt/ros/$ROS_DISTRO/setup.bash; cd /home/${USERNAME}/ros_ws;'
+RUN /bin/bash -c '. /opt/ros/$ROS_DISTRO/setup.bash; cd /home/${USERNAME}/ros_ws; catkin_make'
